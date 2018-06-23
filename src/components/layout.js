@@ -13,6 +13,9 @@ const Layout = ({ children, data }) => (
         site {
           siteMetadata {
             title
+            intro
+            description
+            keywords
           }
         }
       }
@@ -22,11 +25,11 @@ const Layout = ({ children, data }) => (
         <Helmet
           title={data.site.siteMetadata.title}
           meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
+            { name: 'description', content: data.site.siteMetadata.description },
+            { name: 'keywords', content: data.site.siteMetadata.keywords },
           ]}
         />
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header siteTitle={data.site.siteMetadata.title} siteIntro={data.site.siteMetadata.intro}/>
         <div
           style={{
             margin: '0 auto',
