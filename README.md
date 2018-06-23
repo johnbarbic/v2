@@ -1,26 +1,11 @@
-# gatsby-starter-default
-The default Gatsby starter.
+# V2 starter
+The default Gatsby starter for V2.
 
 For an overview of the project structure please refer to the [Gatsby documentation - Building with Components](https://www.gatsbyjs.org/docs/building-with-components/).
 
-## Install
+I'm experimenting Gatsby V2. I'm using this to teach myself about the following:
 
-Make sure that you have the Gatsby CLI program installed:
-```sh
-npm install --global gatsby-cli
-```
+1. StaticQuery (Component level GraphQL)
+2. Two types of page creation.  I want to site pages from md files and separately a blog from a second set of md files.
+3. CSS inlining and splitting
 
-And run from your CLI:
-```sh
-gatsby new gatsby-example-site
-```
-
-Then you can run it by:
-```sh
-cd gatsby-example-site
-gatsby develop
-```
-
-## Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
