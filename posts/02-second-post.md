@@ -2,10 +2,10 @@
 date: 2018-02-01
 
 title: Second Post
-slug: second-post
 description: second test description
 
-tag:
+#YAML array syntax
+tags:
 - tag 2
 - tag 3
 

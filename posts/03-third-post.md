@@ -2,10 +2,10 @@
 date: 2018-03-01
 
 title: Third Post
-slug: third-post
 description: third test description
 
-tag:
+#YAML array syntax
+tags:
 - tag 4
 - tag 5
 

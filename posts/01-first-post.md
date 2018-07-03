@@ -2,10 +2,10 @@
 date: 2018-01-01
 
 title: First Post
-slug: first-post
 description: test description
 
-tag:
+#YAML array syntax
+tags:
 - tag 1
 - tag 2
 

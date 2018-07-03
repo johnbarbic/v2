@@ -1,8 +1,8 @@
 ---
 date: 2018-03-01
 
-title: Fifth Post
-description: fifth test description
+title: Tenth Post
+description: tenth test description
 
 #YAML array syntax
 tags:
@@ -13,4 +13,4 @@ published: true
 
 ---
 
-This is the fifth test post.
+This is the tenth test post.

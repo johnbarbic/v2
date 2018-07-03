@@ -2,10 +2,10 @@
 date: 2018-03-01
 
 title: Forth Post
-slug: forth-post
 description: forth test description
 
-tag:
+#YAML array syntax
+tags:
 - tag 2
 - tag 3
 

@@ -32,10 +32,12 @@ export const query = graphql`
     totalCount
     edges{
       node{
+        fields{
+          slug
+        }
         frontmatter {
           title
           date
-          slug
           description
           published
         }
