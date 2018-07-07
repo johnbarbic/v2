@@ -1,45 +1,45 @@
-
-const path = require("path");
+const path = require('path')
 // const { createFilePath } = require(`gatsby-source-filesystem`);
-const _ = require("lodash");
-
+const _ = require('lodash')
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions;
-  let slug;
+  const { createNodeField } = actions
+  let slug
 
-	if (node.internal.type === `MarkdownRemark`) {
-		const fileNode = getNode(node.parent)
-    const parsedFilePath = path.parse(fileNode.relativePath);
+  if (node.internal.type === `MarkdownRemark`) {
+    const fileNode = getNode(node.parent)
+    const parsedFilePath = path.parse(fileNode.relativePath)
 
-    slug = `/${parsedFilePath.name}/`;
-
+    slug = `/${parsedFilePath.name}`
 
     // const docTypeArray = fileNode.dir.split('/')
-		// const type = docTypeArray[docTypeArray.length-1]
-     //   console.log(`\n`, slug);
+    // const type = docTypeArray[docTypeArray.length-1]
+    //   console.log(`\n`, slug);
 
     // Add slug as a field on the node.
-    createNodeField({ node, name: `slug`, value: slug });
-
-
+    createNodeField({ node, name: `slug`, value: slug })
   }
 }
 
 exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
 
-  const pageTemplate = path.resolve("src/templates/page.js")
-  const blogPostTemplate = path.resolve("src/templates/blogpost.js")
-  const tagTemplate = path.resolve("src/templates/tags.js")
+  const pageTemplate = path.resolve('src/templates/page.js')
+  const blogPostTemplate = path.resolve('src/templates/blogpost.js')
+  const tagTemplate = path.resolve('src/templates/tags.js')
 
-//two named queries...
+  // redirect / to the /home page.
+  createRedirect({
+    fromPath: '/',
+    toPath: '/home',
+    isPermanent: true,
+    redirectInBrowser: true,
+  })
+
+  //two named queries...note the use of glob filtering here
 
   return graphql(`
     {
-
-
-
       pages: allMarkdownRemark(
         sort: { order: DESC, fields: [frontmatter___date] }
         filter: {
@@ -49,16 +49,16 @@ exports.createPages = ({ actions, graphql }) => {
       ) {
         edges {
           node {
-            fields{
+            fields {
               slug
             }
             frontmatter {
-							tags
-							parent
-							description
-							published
-							lastModDate
-						}
+              tags
+              parent
+              description
+              published
+              lastModDate
+            }
           }
         }
       }
@@ -72,23 +72,19 @@ exports.createPages = ({ actions, graphql }) => {
       ) {
         edges {
           node {
-            fields{
+            fields {
               slug
             }
             frontmatter {
-							tags
-							parent
-							description
-							published
-							lastModDate
-						}
+              tags
+              parent
+              description
+              published
+              lastModDate
+            }
           }
         }
       }
-
-
-
-
     }
   `).then(result => {
     if (result.errors) {
@@ -96,31 +92,30 @@ exports.createPages = ({ actions, graphql }) => {
     }
 
     // Make pages with the pages result
-    const pages = result.data.pages.edges;
+    const pages = result.data.pages.edges
 
     // Create post detail pages
     pages.forEach(({ node }) => {
-      const slug = node.fields.slug;
-      //console.log(slug);
+      const slug = node.fields.slug
+      // console.log(slug);
 
       createPage({
         path: slug,
-        component: pageTemplate
+        component: pageTemplate,
       })
     })
 
-
     // Make posts with the posts result
-    const posts = result.data.posts.edges;
+    const posts = result.data.posts.edges
 
     // Create post detail pages
     posts.forEach(({ node }) => {
-      const slug = node.fields.slug;
-      //console.log(slug);
+      const slug = node.fields.slug
+      //console.log(slug)
 
       createPage({
         path: slug,
-        component: blogPostTemplate
+        component: blogPostTemplate,
       })
     })
 
@@ -128,7 +123,7 @@ exports.createPages = ({ actions, graphql }) => {
     let tags = []
     // Iterate through each post, putting all found tags into `tags`
     _.each(posts, edge => {
-      if (_.get(edge, "node.frontmatter.tags")) {
+      if (_.get(edge, 'node.frontmatter.tags')) {
         tags = tags.concat(edge.node.frontmatter.tags)
       }
     })
@@ -145,7 +140,5 @@ exports.createPages = ({ actions, graphql }) => {
         },
       })
     })
-
-    
   })
 }

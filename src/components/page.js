@@ -1,5 +1,5 @@
-import React from "react"
-import Layout from "./layout"
+import React from 'react'
+import Layout from './layout'
 
 export default ({ children }) => {
   const post = children
@@ -12,4 +12,3 @@ export default ({ children }) => {
     </Layout>
   )
 }
-

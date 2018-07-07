@@ -28,7 +28,6 @@ const Header = ({ siteTitle, siteIntro }) => (
         </Link>
       </h1>
       <p>{siteIntro}</p>
-          
     </div>
   </div>
 )

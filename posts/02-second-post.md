@@ -10,7 +10,6 @@ tags:
 - tag 3
 
 published: true
-
 ---
 
 This is the second test post.

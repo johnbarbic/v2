@@ -1,49 +1,37 @@
 import React from 'react'
-// import Layout from '../components/layout'
 import { graphql } from 'gatsby'
+import Layout from '../components/layout'
 
-export default ({ data }) => {
-   //console.log(data);
+export default function Template({
+  data, // this prop will be injected by the GraphQL query below.
+}) {
+  const { markdownRemark } = data // data.markdownRemark holds our post data
+  const { frontmatter, html } = markdownRemark
   return (
-    <div>
-      <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
-      {data.allMarkdownRemark.edges.map(({ node }) => (
-  //        const isPublished = node.frontmatter.date == true ? 'yes' : 'No';
-
-        <div key={node.id}>
-          <div>
-            {node.frontmatter.title}{" "}
-            <span style={{color:'blue'}}> - {node.frontmatter.date}</span>
-          </div>
-          <div>{node.frontmatter.description}</div>
-          <div style={{color:'blue'}}>{node.frontmatter.published === true ? 'Yes' : 'No'}</div>
-          <div style={{margin:'0 0 20px'}}>{node.frontmatter.slug}</div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export const query = graphql`
-  query IndexQuery {
-  allMarkdownRemark (
-    filter: { frontmatter : { published: { eq: true } } }
-  ) {
-    totalCount
-    edges{
-      node{
-        fields{
-          slug
-        }
-        frontmatter {
-          title
-          date
-          description
-          published
-        }
+    <Layout>
+      <div className="home-container">
+        <h1>{frontmatter.title}</h1>
+        <h2>{frontmatter.date}</h2>
+        <div
+          className="blog-post-content"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      </div>
+    </Layout>
+  )
+}
+export const pageQuery = graphql`
+  query homePage {
+    markdownRemark(fields: { slug: { eq: "/home" } }) {
+      html
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        description
+        date(formatString: "MMMM DD, YYYY")
       }
     }
   }
-}
-`;
-
+`
