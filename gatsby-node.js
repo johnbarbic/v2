@@ -28,7 +28,7 @@ exports.createPages = ({ actions, graphql }) => {
   const blogPostTemplate = path.resolve('src/templates/blogpost.js')
   const tagTemplate = path.resolve('src/templates/tags.js')
 
-  // redirect / to the /home page.
+  // Because our home page is created with the /home slug, redirect / to it.
   createRedirect({
     fromPath: '/',
     toPath: '/home',

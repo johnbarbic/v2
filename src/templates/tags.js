@@ -28,10 +28,6 @@ const Tags = ({ pageContext, data }) => {
             )
           })}
         </ul>
-        {/*
-              This links to a page that does not yet exist.
-              We'll come back to it!
-            */}
         <Link to="/tags">All tags</Link>
       </div>
     </Layout>
@@ -60,13 +56,15 @@ Tags.propTypes = {
 }
 
 export default Tags
-
+//note that we do not want to include unpublished pages here
 export const pageQuery = graphql`
   query TagPage($tag: String) {
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: {
+        frontmatter: { tags: { in: [$tag] }, published: { ne: false } }
+      }
     ) {
       totalCount
       edges {
@@ -77,6 +75,7 @@ export const pageQuery = graphql`
           frontmatter {
             title
             description
+            published
           }
         }
       }
