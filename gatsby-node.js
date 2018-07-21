@@ -1,6 +1,7 @@
 const path = require('path')
 // const { createFilePath } = require(`gatsby-source-filesystem`);
 const _ = require('lodash')
+//const createPaginatedPages = require('gatsby-paginate')
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
@@ -28,13 +29,15 @@ exports.createPages = ({ actions, graphql }) => {
   const blogPostTemplate = path.resolve('src/templates/blogpost.js')
   const tagTemplate = path.resolve('src/templates/tags.js')
 
-  // Because our home page is created with the /home slug, redirect / to it.
+  /* / Because our home page is created with the /home slug, redirect / to it.
   createRedirect({
     fromPath: '/',
     toPath: '/home',
     isPermanent: true,
     redirectInBrowser: true,
   })
+
+*/
 
   //two named queries...note the use of glob filtering here
 
@@ -109,13 +112,19 @@ exports.createPages = ({ actions, graphql }) => {
     const posts = result.data.posts.edges
 
     // Create post detail pages
-    posts.forEach(({ node }) => {
+    posts.forEach(({ node }, index) => {
       const slug = node.fields.slug
+      const previous = index === posts.length - 1 ? null : posts[index + 1].node
+      const next = index === 0 ? null : posts[index - 1].node
       //console.log(slug)
 
       createPage({
         path: slug,
         component: blogPostTemplate,
+        context: {
+          previous,
+          next,
+        },
       })
     })
 

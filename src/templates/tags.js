@@ -22,7 +22,7 @@ const Tags = ({ pageContext, data }) => {
             const slug = node.fields.slug
             const { path, title } = node.frontmatter
             return (
-              <li key={path}>
+              <li key={title}>
                 <Link to={slug}>{title}</Link>
               </li>
             )
@@ -45,7 +45,7 @@ Tags.propTypes = {
         PropTypes.shape({
           node: PropTypes.shape({
             frontmatter: PropTypes.shape({
-              path: PropTypes.string.isRequired,
+              // path: PropTypes.string.isRequired,
               title: PropTypes.string.isRequired,
             }),
           }),

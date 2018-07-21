@@ -1,5 +1,5 @@
 ---
-date: 2018-03-01
+date: 2018-03-02
 
 title: Forth Post
 description: forth test description
@@ -9,7 +9,7 @@ tags:
 - tag 2
 - tag 3
 
-published: false
+published: true
 
 
 
